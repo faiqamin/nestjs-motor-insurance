@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  database:
+    image: postgres:13
+    container_name: motor_insurance_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: MOTOR_INSURANCE_WEBSITE
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+volumes:
+  db_data:
